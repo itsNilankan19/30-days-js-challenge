@@ -1,0 +1,25 @@
+# 30-days-js-challenge
+
+Question --
+
+Given an object, return a valid JSON string of that object. You may assume the object only inludes strings, integers, arrays, objects, booleans, and null. The returned string should not include extra spaces. The order of keys should be the same as the order returned by Object.keys(). Please solve it without using the built-in JSON.stringify method.
+
+
+Solution --
+
+
+/**
+ * @param {any} object
+ * @return {string}
+ */
+var jsonStringify = function(object) {
+  if (typeof object !== 'object') {
+    if (typeof object === 'string') return '"' + object + '"';
+    return object.toString();
+  }
+  if (object === null) return 'null';
+  if (Array.isArray(object)) {
+    return '[' + object.map((obj) => jsonStringify(obj)).toString() + ']';
+  }
+  return '{' + Object.keys(object).map(key => `"${key}":${jsonStringify(object[key])}`).join(',') + '}'
+};

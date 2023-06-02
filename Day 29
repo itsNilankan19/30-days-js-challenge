@@ -1,0 +1,34 @@
+# 30-days-js-challenge
+
+Question -- 
+
+Write a generator function that returns a generator object which yields the fibonacci sequence.
+The fibonacci sequence is defined by the relation Xn = Xn-1 + Xn-2.
+The first few numbers of the series are 0, 1, 1, 2, 3, 5, 8, 13.
+
+Solution --
+
+/**
+ * @return {Generator<number>}
+ */
+var fibGenerator = function*() {
+    let a = 0;
+    let b = 1;
+    yield a; // first call returns 0
+    yield b; // second call returns 1
+
+    let c;
+    while (true) { // third call and after enters this loop
+        c = a + b; // calculate c for current call
+        yield c; // return c
+
+        // when another call is made, set a and b to next iteration to calculate next c value
+        a = b;
+        b = c;
+    }
+};
+/**
+ * const gen = fibGenerator();
+ * gen.next().value; // 0
+ * gen.next().value; // 1
+ */
